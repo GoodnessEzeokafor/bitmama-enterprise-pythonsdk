@@ -1,7 +1,6 @@
 from config import STAGING_BASE_URL,PRODUCTION_BASE_URL,SDK_ENVIRONMENTS
 import httpx
 import trio
-import os
 
 # open connection 
 
