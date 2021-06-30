@@ -5,45 +5,46 @@ import os
 
 # open connection 
 
-class Api:
-    def __init__(self, token, environment,url='/rate') -> None:
+class Base(object):
+    def __init__(self, token, environment) -> None:
         if not token: raise TypeError("please enter a valid token")
         if environment not in SDK_ENVIRONMENTS: raise TypeError("please enter a valid environment")
-        if not url : raise TypeError("please enter a valid url")
-        if url[0] != "/": url = "/" + url
         self._token = token  # set auth token
         self._headers = {
             'token':self._token,
             'Content-Type':'application/json'
         } # set headers
-        self._url = url # set url
         self._base_url = PRODUCTION_BASE_URL if environment == "production" or environment == "prod" else STAGING_BASE_URL
     
     def health(self):
         return "works"
 
-    async def get(self):
+    async def get(self, endpoint, **kwargs):
         '''
         function for making GET requests
         returns the data
         '''
+        if not endpoint : raise TypeError("please enter a valid endpoint")
+        if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''
         output_response = {}
-        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url) as client:
-            response = await client.get(self._url)
+        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url,params=kwargs) as client:
+            response = await client.get(endpoint)
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
             output_response[resp_keys] = resp_values
         return output_response
 
-    async def post(self, data):
+    async def post(self,endpoint, **kwargs):
         '''
         function for making POST requests
         returns the data
         '''
+        if not endpoint : raise TypeError("please enter a valid endpoint")
+        if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''
         output_response = {}
-        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url, data=data) as client:
+        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url, data=kwargs) as client:
             response = await client.post(self._url)
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
@@ -52,11 +53,9 @@ class Api:
 
     def get_base_url(self):
         return self._base_url
-    def get_url(self):
-        return self._url
 
 if __name__ == "__main__":
-    api = Api('3ee3701e057b26c6b55d0bee2', "dev", "webhook")
+    api = Base('3ee3701e057b26c6b55d0bee2', "dev")
     print(api.health())
     print(api.get_base_url())
     print(api.get_url())    
