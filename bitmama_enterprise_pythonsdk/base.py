@@ -7,10 +7,6 @@ import os
 
 class Base(object):
     def __init__(self, token, environment) -> None:
-        # data = dict(kwargs.get("data"))
-        # print(data)
-        # token = data['token']
-        # environment = data["environment"]
         if not token: raise TypeError("please enter a valid token")
         if environment not in SDK_ENVIRONMENTS: raise TypeError("please enter a valid environment")
         self._token = token  # set auth token
@@ -56,23 +52,4 @@ class Base(object):
             output_response[resp_keys] = resp_values
         return output_response
 
-    def get_base_url(self):
-        return self._base_url
 
-# if __name__ == "__main__":
-#     api = Base('3ee3701e057b26c6b55d0bee2', "dev")
-#     print(api.health())
-#     print(api.get_base_url())
-#     print(api.get_url())    
-#     run_get = trio.run(api.get)
-#     # run_post = trio.run(api.post)
-#     # # trio.run(print(api.post))
-#     print(run_get['code'])
-#     # resp_dict={}
-#     # # resp_dict -
-#     # for resp_keys,resp_values in run_get.items():
-#     #     # print(resp_keys, ":", resp_values)
-#     #     resp_dict[resp_keys] = resp_values
-#     # print("----------new dictionary-------------")
-#     # print("new oh",resp_dict['message'])
-#     # print("----------new dictionary-------------")
