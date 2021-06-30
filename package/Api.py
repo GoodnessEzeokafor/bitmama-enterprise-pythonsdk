@@ -36,15 +36,15 @@ class Api:
             output_response[resp_keys] = resp_values
         return output_response
 
-    async def post(self):
+    async def post(self, data):
         '''
         function for making POST requests
         returns the data
         '''
         response = ''
         output_response = {}
-        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url) as client:
-            response = await client.get(self._url)
+        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url, data=data) as client:
+            response = await client.post(self._url)
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
             output_response[resp_keys] = resp_values
