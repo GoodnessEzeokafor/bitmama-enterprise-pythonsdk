@@ -31,12 +31,9 @@ class Api:
         output_response = {}
         async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url) as client:
             response = await client.get(self._url)
-        # return response.json()
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
-             # print(resp_keys, ":", resp_values)
             output_response[resp_keys] = resp_values
-        # print("new oh",output_response['message'])
         return output_response
 
     async def post(self):
@@ -48,12 +45,9 @@ class Api:
         output_response = {}
         async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url) as client:
             response = await client.get(self._url)
-        # return response.json()
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
-             # print(resp_keys, ":", resp_values)
             output_response[resp_keys] = resp_values
-        # print("new oh",output_response['message'])
         return output_response
 
     def get_base_url(self):
