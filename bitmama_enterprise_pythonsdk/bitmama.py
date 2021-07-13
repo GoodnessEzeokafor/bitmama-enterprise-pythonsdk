@@ -20,9 +20,11 @@
     return resources.banks.resolve(Enterprise.BASE_URL, Enterprise.TOKEN, param);
   },
 '''
-from base import Base
+from bank import Bank
 from config import TICKERS
+from rate import Rate
 from wallet import Wallet
+from webhook import Webhook
 class Bitmama():
     def __init__(self, token, environment) -> None:
         self._token = token
@@ -41,5 +43,5 @@ if __name__ == "__main__":
     # print(bitmama.wallet.create_ripple_wallet("ripple python sdk"))
     # pagination = {"page":1,"size":40}
     # print(bitmama.wallet.listCryptoWallet("teth", pagination))
-    print(bitmama.tickers())
+    print(bitmama.rate.getRate("xlmusd"))
 

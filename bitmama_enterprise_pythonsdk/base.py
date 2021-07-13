@@ -25,7 +25,7 @@ class Base(object):
         if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''
         output_response = {}
-        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url,params=params) as client:
+        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url,params=params,timeout=50.0) as client:
             response = await client.get(endpoint)
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
