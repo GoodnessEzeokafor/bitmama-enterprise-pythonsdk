@@ -45,12 +45,12 @@ class Wallet(Base):
         api_call = trio.run(self.post,"/address",params)
         return api_call
 
-    def listCryptoWallet(self,coin, pagination):
+    def list_crypto_wallets(self,coin, pagination):
         params = dict(page=pagination['page'],size=pagination['size'], coin=coin)
         api_call = trio.run(self.get,"/address",params)
         return api_call
 
-    def enterpriseWallet(self):
+    def enterprise_wallet(self):
         '''
         list all wallets created on bitmama enterprise
         '''
