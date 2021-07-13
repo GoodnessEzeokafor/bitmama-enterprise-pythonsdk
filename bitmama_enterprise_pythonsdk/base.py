@@ -21,6 +21,7 @@ class Base(object):
         function for making GET requests
         returns the data
         '''
+        print(endpoint)
         if not endpoint : raise TypeError("please enter a valid endpoint")
         if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''
