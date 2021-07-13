@@ -1,22 +1,15 @@
+'''
+Wallet module
+'''
 from base import Base
 import trio
 
-# from bitmama.base import Base
-# class Wallet(Base):
-#     @classmethod
-#     def create_wallet(cls,label,coin):
 
 
 class Wallet(Base):
     def __init__(self,token, environment) -> None:
         super().__init__(token, environment)
         self._environment = environment
-    # def __init__(self,token, environment, **kwargs) -> None:
-    #     super().__init__(token, environment, **kwargs)
-    # # def __init__(self, ) -> None:
-    # #     self.token = token
-    # #     self.environment = environment
-    # #     print(kwargs)
     
     def create_wallet(self, label, coin):
         # print(coin, label)
@@ -50,4 +43,16 @@ class Wallet(Base):
     def create_stellar_wallet(self, label):
         params = dict(label=label,coin="xlm")
         api_call = trio.run(self.post,"/address",params)
+        return api_call
+
+    def listCryptoWallet(self,coin, pagination):
+        params = dict(page=pagination['page'],size=pagination['size'], coin=coin)
+        api_call = trio.run(self.get,"/address",params)
+        return api_call
+
+    def enterpriseWallet(self):
+        '''
+        list all wallets created on bitmama enterprise
+        '''
+        api_call = trio.run(self.get,"/wallet")
         return api_call

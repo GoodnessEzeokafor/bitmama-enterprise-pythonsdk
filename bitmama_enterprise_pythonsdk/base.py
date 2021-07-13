@@ -16,7 +16,7 @@ class Base(object):
     def health(self):
         return "works"
 
-    async def get(self, endpoint, **kwargs):
+    async def get(self, endpoint, params={}):
         '''
         function for making GET requests
         returns the data
@@ -25,14 +25,14 @@ class Base(object):
         if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''
         output_response = {}
-        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url,params=kwargs) as client:
+        async with httpx.AsyncClient(headers=self._headers,base_url=self._base_url,params=params) as client:
             response = await client.get(endpoint)
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
             output_response[resp_keys] = resp_values
-        return output_response
+        return output_response['message']
 
-    async def post(self,endpoint, params):
+    async def post(self,endpoint, params={}):
         '''
         function for making POST requests
         returns the data
@@ -48,6 +48,6 @@ class Base(object):
         new_responses_json = response.json()
         for resp_keys,resp_values in new_responses_json.items():
             output_response[resp_keys] = resp_values
-        return output_response
+        return output_response['message']
 
 
