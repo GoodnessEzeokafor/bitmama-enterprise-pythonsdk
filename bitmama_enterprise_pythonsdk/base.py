@@ -37,8 +37,6 @@ class Base(object):
         function for making POST requests
         returns the data
         '''
-        print(params)
-        print(self._headers)
         if not endpoint : raise TypeError("please enter a valid endpoint")
         if endpoint[0] != "/": endpoint = "/" + endpoint
         response = ''

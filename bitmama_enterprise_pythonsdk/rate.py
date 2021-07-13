@@ -6,7 +6,7 @@ class Rate(Base):
         super().__init__(token, environment)
         self._environment = environment
     
-    def getRate(self, ticker):
+    def get_rate(self, ticker):
         params = dict(ticker=ticker)
         api_call = trio.run(self.get,"/rate",params)
         return api_call

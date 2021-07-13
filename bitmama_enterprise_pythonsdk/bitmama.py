@@ -10,9 +10,7 @@
   createWebhook: (endpoint: string) => {
     return resources.webhooks.create(Enterprise.BASE_URL, Enterprise.TOKEN, endpoint);
   },
-  getWebhook: () => {
-    return resources.webhooks.get(Enterprise.BASE_URL, Enterprise.TOKEN);
-  },
+
   listBanks: (countryCode:BankCountryCode) => {
     return resources.banks.list(Enterprise.BASE_URL, Enterprise.TOKEN,countryCode);
   },
@@ -43,5 +41,5 @@ if __name__ == "__main__":
     # print(bitmama.wallet.create_ripple_wallet("ripple python sdk"))
     # pagination = {"page":1,"size":40}
     # print(bitmama.wallet.listCryptoWallet("teth", pagination))
-    print(bitmama.rate.getRate("xlmusd"))
+    print(bitmama.webhook.get_webhook())
 
