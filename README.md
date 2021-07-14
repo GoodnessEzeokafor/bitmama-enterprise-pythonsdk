@@ -96,7 +96,7 @@ print(bitmama.banks.create_webhook(endpoint))
 bitmama = Bitmama(token, env)
 print(bitmama.tickers())
 ```
-## get exchange rage
+## get exchange rate
 ```python
 bitmama = Bitmama(token, env)
 print(bitmama.get_rate('btcngn'))
