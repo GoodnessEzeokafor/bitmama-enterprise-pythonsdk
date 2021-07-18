@@ -2,6 +2,8 @@
 
 Python API wrapper for [Bitmama Enterprise](https://bitmama.io/).
 This SDK can be used to create a crypto wallet and receive crypto transactions
+https://developers.bitmama.io/
+
 ### Installation
 
 ```
@@ -193,3 +195,11 @@ print(bitmama.get_rate('btcngn'))
 * ceur_xrp_rate
 * ceur_xlm_rate
 * ceur_cusd_rate
+
+
+
+
+## Contribution Guidelines
+* create a new branch
+* make sure new branch and main branch are in sync
+* after updating codebase write tests and make sure the all pass
